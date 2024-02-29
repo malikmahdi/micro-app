@@ -1,65 +1,94 @@
-import { useState } from "react";
-import Navbar from "./components/layout/navbar";
-import HeroSection from "./components/layout/heroSection";
-import Card from "./components/layout/card";
-import Statement from "./components/layout/statementSection";
-import Address from "./components/layout/address";
-import Footer from "./components/layout/footer";
-import Banner from "./components/layout/banner";
+// import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom";
+// import React, { ChangeEvent } from "react";
+// import IAuth from "./components/interface/iauth";
+// import LoginPage from "./components/layouts/login";
+// import DashboardPage from "./pages/admin/dashboard";
+// import HomeUnLogin from "./pages/user/home";
+// import BeritaPage from "./pages/user/berita";
+// import FormPartaiPage from "./pages/admin/addPartai";
+// import ListPartaiPage from "./pages/admin/listPartai";
+// import ListPaslonPage from "./pages/admin/listPaslon";
+// import InfoPemiluPage from "./pages/user/infoPemilu";
 
-function App() {
-  return (
-    <div className="bg-dasar">
-      {/* Navbar */}
-      <Navbar />
-      {/* navbar */}
+// const App: React.FC = () => {
+//   const navigate = useNavigate();
+//   const [isLoginAdmin, setIsLoginAdmin] = React.useState<boolean>(false);
+//   const [isLogin, setIsLogin] = React.useState<boolean>(false);
+//   const [form, setForm] = React.useState<IAuth>({
+//     username: "",
+//     password: "",
+//   });
 
-      <div className="px-36">
-        {/* Hero Section */}
-        <HeroSection />
-        {/* hero  */}
+//   function handleSetForm(event: ChangeEvent<HTMLInputElement>): void {
+//     setForm({
+//       ...form,
+//       [event.target.name]: event.target.value,
+//     });
+//   }
 
-        {/* Sec-2 */}
-        <section className="mt-20">
-          <div className="grid grid-cols-3 gap-5 ">
-            <Banner />
-            <Card />
-          </div>
-        </section>
-        {/* sec-2 */}
+//   function login(e: React.FormEvent<HTMLFormElement>) {
+//     e.preventDefault();
+//     if (form.username === "admin" && form.password === "admin") {
+//       setIsLoginAdmin(true);
+//     } else if (
+//       form.username !== "" &&
+//       form.password !== "" &&
+//       form.username !== "admin" &&
+//       form.password !== "admin"
+//     ) {
+//       setIsLogin(true);
+//     }
+//   }
 
-        {/* Sec-3*/}
-        <section className="mt-6">
-          <div className="grid grid-cols-3 gap-5">
-            <Card />
-            <Card />
-            <Card />
-          </div>
-        </section>
-        {/* sec-3*/}
-      </div>
+//   React.useEffect(() => {
+//     navigate("/home");
+//   }, [isLogin]);
 
-      {/* Sec-4 */}
-      <section className="bg-white mt-24">
-        <Statement />
-      </section>
-      {/* sec-4 */}
+//   React.useEffect(() => {
+//     navigate("/admin");
+//   }, [isLoginAdmin]);
 
-      {/* Sec-5 */}
-      <section className="bg-black">
-        <Address />
-      </section>
-      {/* sec-5 */}
+//   function PrivateRoute() {
+//     if (isLogin) {
+//       return <Outlet />;
+//     } else {
+//       return <Navigate to="/login" />;
+//     }
+//   }
 
-      <div className="h-1 bg-white"></div>
+//   function PrivateRouteAdmin() {
+//     if (isLoginAdmin) {
+//       return <Outlet />;
+//     } else {
+//       return <Navigate to="/login" />;
+//     }
+//   }
 
-      {/* Sec-6 */}
-      <footer className="bg-black">
-        <Footer />
-      </footer>
-      {/* sec-6 */}
-    </div>
-  );
-}
+//   return (
+//     <>
+//       <Routes>
+//         <Route
+//           path="/login"
+//           element={<LoginPage handle={handleSetForm} login={login} />}
+//         />
 
-export default App;
+//         <Route path="/" element={<PrivateRouteAdmin />}>
+//           <Route path="/admin" element={<DashboardPage />} />
+//         </Route>
+
+//         <Route path="/" element={<PrivateRoute />}>
+//           <Route path="/home" element={<HomeUnLogin />} />
+//         </Route>
+
+//         <Route path="/info-berita" element={<BeritaPage />} />
+//         <Route path="/info-pemilu" element={<InfoPemiluPage />} />
+//         <Route path="/add-partai" element={<FormPartaiPage />} />
+//         <Route path="/add-paslon" element={<FormPartaiPage />} />
+//         <Route path="/list-partai" element={<ListPartaiPage />} />
+//         <Route path="/list-paslon" element={<ListPaslonPage />} />
+//       </Routes>
+//     </>
+//   );
+// };
+
+// export default App;

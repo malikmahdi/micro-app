@@ -9,3 +9,12 @@
     rgba(117, 6, 6, 0.540837) 109.46%
   );
 }
+
+.text-outline {
+  -webkit-text-stroke: 2px white;
+}
+
+.text-outline-child {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Banner = () => {
   return (
     <div className="col-span-2 relative  bg-[url('assets/img-kpu-2.png')] bg-cover ">
@@ -6,9 +8,11 @@ const Banner = () => {
           SENIN,03 JAN 2023
         </button>
         <div className="">
-          <h2 className="text-white font-bold text-[32px]">
-            KPU TETAPKAN 3 MENTOR TERBAIK
-          </h2>
+          <Link to="/info-berita">
+            <h2 className="text-white font-bold text-[32px] hover:underline">
+              KPU TETAPKAN 3 MENTOR TERBAIK
+            </h2>
+          </Link>
           <p className="text-white text-[24px]">Super Admin</p>
         </div>
       </div>
