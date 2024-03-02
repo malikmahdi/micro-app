@@ -1,66 +1,76 @@
 // tinggal ganti bg tiap card paslon
 
-import Navbar from "../../components/layouts/navbar";
 import Monyet2 from "../../assets/monyet-2.png";
+import Person1 from "../../assets/person.jpg";
+import NavbarAdmin from "../../components/layouts/navbarAdmin";
+
+const dataPaslon = [
+  {
+    no: 1,
+    name: "ARIS DEPOK",
+    akumulasi: "45%",
+    totalVoter: "117 Voters",
+    bgCard: "bg-[#FACD55]",
+    colorText: "text-[#5D5517]",
+    colorBorder: "border-[#5D5517]",
+  },
+  {
+    no: 2,
+    name: "REZA KICAU MANIA",
+    akumulasi: "75%",
+    totalVoter: "300 Voters",
+    bgCard: "bg-[#6EFAF5]",
+    colorText: "text-[#21585D]",
+    colorBorder: "border-[#21585D]",
+  },
+  {
+    no: 3,
+    name: "RIYAN GRACIAS",
+    akumulasi: "45%",
+    totalVoter: "117 Voters",
+    bgCard: "bg-[#EE5354]",
+    colorText: "text-[#5D100E]",
+    colorBorder: "border-[#5D100E]",
+  },
+];
+
+const dataVoter = [
+  {
+    no: 1,
+    nama: "Alif Angga",
+    alamat: "Jakarta Timur",
+    gender: "Laki-laki",
+    paslon: "Aris Depok",
+  },
+  {
+    no: 2,
+    nama: "Ahmad Firdaus",
+    alamat: "Jakarta Pusat",
+    gender: "Laki-laki",
+    paslon: "Reza Kicau Mania",
+  },
+  {
+    no: 3,
+    nama: "Agun Prabowo",
+    alamat: "Jakarta Selatan",
+    gender: "Laki-laki",
+    paslon: "Riyan Gracias",
+  },
+  {
+    no: 4,
+    nama: "Malik Mahdi",
+    alamat: "Jakarta Utara",
+    gender: "Laki-laki",
+    paslon: "Aris Depok",
+  },
+];
 
 const DashboardPage = () => {
-  const dataPaslon = [
-    {
-      no: 1,
-      name: "ARIS DEPOK",
-      akumulasi: "45%",
-      totalVoter: "117 Voters",
-    },
-    {
-      no: 2,
-      name: "REZA KICAU MANIA",
-      akumulasi: "75%",
-      totalVoter: "300 Voters",
-    },
-    {
-      no: 3,
-      name: "RIYAN GRACIAS",
-      akumulasi: "45%",
-      totalVoter: "117 Voters",
-    },
-  ];
-
-  const dataVoter = [
-    {
-      no: 1,
-      nama: "Alif Angga",
-      alamat: "Jakarta Timur",
-      gender: "Laki-laki",
-      paslon: "Aris Depok",
-    },
-    {
-      no: 2,
-      nama: "Ahmad Firdaus",
-      alamat: "Jakarta Pusat",
-      gender: "Laki-laki",
-      paslon: "Reza Kicau Mania",
-    },
-    {
-      no: 3,
-      nama: "Agun Prabowo",
-      alamat: "Jakarta Selatan",
-      gender: "Laki-laki",
-      paslon: "Riyan Gracias",
-    },
-    {
-      no: 4,
-      nama: "Malik Mahdi",
-      alamat: "Jakarta Utara",
-      gender: "Laki-laki",
-      paslon: "Aris Depok",
-    },
-  ];
   return (
     <>
-      <Navbar
+      <NavbarAdmin
         tittleNav="
-          DASHBOARD PEMILU
-          "
+          DASHBOARD PEMILU"
       />
       <div className="px-36 my-20">
         <h1 className="text-btn font-bold text-[40px] my-16 text-center">
@@ -70,25 +80,35 @@ const DashboardPage = () => {
         <div className="grid grid-cols-3 gap-5">
           {dataPaslon.map((items) => (
             <div className="col-span-1">
-              <div className="w-24 h-24 mx-auto flex items-center justify-center mb-6 bg-cardinfo2 border border-8 border-btn rounded-full  text-btn  text-[32px] font-bold">
+              <div
+                className={`w-24 h-24 mx-auto flex items-center justify-center mb-6 ${items.bgCard}  border-8 ${items.colorBorder} rounded-full ${items.colorText} text-[32px] font-bold`}
+              >
                 <h5>{items.no}</h5>
               </div>
-              <div className="bg-cardinfo2 rounded-xl p-6 shadow-lg shadow-slate-600">
+              <div
+                className={`${items.bgCard} rounded-xl p-6 shadow-lg shadow-slate-600`}
+              >
                 <div className="mb-2">
                   <img
-                    src={Monyet2}
+                    src={Person1}
                     className="w-full h-60 rounded-xl"
                     alt=""
                   />
                 </div>
                 <div className="">
-                  <h3 className="font-extrabold text-3xl text-2xl text-btn text-outline">
+                  <h3
+                    className={`font-extrabold text-3xl ${items.colorText} text-outline`}
+                  >
                     {items.name}
                   </h3>
-                  <p className="text-btn text-xl font-extrabold text-outline-child">
+                  <p
+                    className={`${items.colorText} text-xl font-extrabold text-outline-child`}
+                  >
                     Akumulasi : {items.akumulasi}
                   </p>
-                  <p className="text-btn text-xl font-extrabold text-outline-child">
+                  <p
+                    className={`${items.colorText}  text-xl font-extrabold text-outline-child`}
+                  >
                     Jumlah Vote : {items.totalVoter}
                   </p>
                 </div>

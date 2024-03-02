@@ -2,32 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import App from "./app.tsx";
-// import LoginPage from "./components/layouts/login.tsx";
-import LoginPage from "./components/layouts/login.tsx";
-import RegisterPage from "./components/layouts/register.tsx";
 import HomeUnLogin from "./pages/user/home.tsx";
 import FormPaslonPage from "./pages/admin/addPaslon.tsx";
 import FormPartaiPage from "./pages/admin/addPartai.tsx";
-import ListPaslonPage from "./pages/admin/listPartai.tsx";
-import ListPartaiPage from "./pages/admin/listPartai.tsx";
+import ListPaslonPage from "./pages/user/listPaslon.tsx";
+import ListPartaiPage from "./pages/user/listPartai.tsx";
 import DashboardPage from "./pages/admin/dashboard.tsx";
 import InfoPemiluPage from "./pages/user/infoPemilu.tsx";
 import BeritaPage from "./pages/user/berita.tsx";
 import ErrorPage from "./pages/error.tsx";
-import CartPage from "./components/layouts/cart.tsx";
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <LoginPage />,
-  //   errorElement: <ErrorPage />,
-  // },
-  // {
-  //   path: "/register",
-  //   element: <RegisterPage />,
-  //   errorElement: <ErrorPage />,
-  // },
   {
     path: "/",
     element: <HomeUnLogin />,
@@ -60,10 +45,6 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardPage />,
-  },
-  {
-    path: "/cart",
-    element: <CartPage />,
   },
 ]);
 

@@ -1,10 +1,10 @@
-import Navbar from "../../components/layouts/navbar";
 import Monyet1 from "../../assets/monyet-1.png";
+import NavbarAdmin from "../../components/layouts/navbarAdmin";
 
 const FormPaslonPage = () => {
   return (
     <>
-      <Navbar
+      <NavbarAdmin
         tittleNav="
           DASHBOARD PEMILU
           "

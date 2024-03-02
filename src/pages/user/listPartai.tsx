@@ -1,12 +1,12 @@
-import Navbar from "../../components/layouts/navbar";
 import Monyet2 from "../../assets/monyet-2.png";
+import Navbar from "../../components/layouts/navbar";
 
 const ListPartaiPage = () => {
   return (
     <>
       <Navbar
         tittleNav="
-          DASHBOARD PEMILU
+        PEMILU PRESIDEN DUMBWAYS.ID
           "
       />
       <div className="px-36">

@@ -6,13 +6,66 @@ import Address from "../../components/layouts/address";
 import Footer from "../../components/layouts/footer";
 import Navbar from "../../components/layouts/navbar";
 import Statement from "../../components/layouts/statementSection";
+//
 
 //
 import Monyet1 from "../../assets/monyet-1.png";
 import Monyet2 from "../../assets/monyet-2.png";
 import ModalPaslon from "../../components/layouts/modalPaslon";
+import Pie from "../../components/elements/pieChart";
+
+const data = [
+  {
+    nomorUrut: 1,
+    namaPaslon: "ARIS DEPOK",
+    presentase: 60,
+    bgCard: "bg-cardinfo1",
+    bgCardMini: "bg-[#5D100E]",
+    colorName: "text-[#5D100E]",
+    bgShadow: "shadow-red-500",
+  },
+  {
+    nomorUrut: 2,
+    namaPaslon: "REZA KICAW MANIA",
+    presentase: 30,
+    bgCard: "bg-cardinfo2",
+    bgCardMini: "bg-[#5D5517]",
+    colorName: "text-[#5D5517]",
+    bgShadow: "shadow-yellow-500",
+  },
+  {
+    nomorUrut: 3,
+    namaPaslon: "RIYAN GRACIAS",
+    presentase: 10,
+    bgCard: "bg-cardinfo3",
+    bgCardMini: "bg-[#255D4E]",
+    colorName: "text-[#255D4E]",
+    bgShadow: "shadow-cyan-600",
+  },
+];
+
+function NextArrow(props: any) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "flex",
+        background: "blue",
+        padding: "20px",
+        fontSize: "20px",
+        border: "10px blue solid",
+        width: "20px",
+        height: "20px",
+      }}
+      onClick={onClick}
+    />
+  );
+}
 
 const InfoPemiluPage = () => {
+  // const [bgcardP = "bg-cardinfo2"] = props;
   const [pilih, setPilih] = useState(false);
   const [openVote, setOpenVote] = useState(false);
   const pilihFunc = () => {
@@ -21,27 +74,26 @@ const InfoPemiluPage = () => {
   };
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    nextArrow: <NextArrow />,
   };
 
-  const data = [
-    {
-      nomorUrut: 1,
-      namaPaslon: "ARIS DEPOK",
-    },
-    {
-      nomorUrut: 2,
-      namaPaslon: "REZA KICAW MANIA",
-    },
-    {
-      nomorUrut: 3,
-      namaPaslon: "RIYAN GRACIAS",
-    },
-  ];
+  const dataCrt = {
+    // labels: ["Paslon 3", "Paslon 2", "Paslon 1"],
+
+    datasets: [
+      {
+        label: "100 of Votes",
+        data: [60, 30, 10],
+        backgroundColor: ["#FF6384", "#FFCD56", "#36A2EB"],
+      },
+    ],
+    plugins: [1, 2, 3],
+  };
 
   return (
     <>
@@ -60,89 +112,16 @@ const InfoPemiluPage = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-3">
+          <div className="col-span-1">
+            <Pie />
+          </div>
           {/* Col-2 */}
           <div className="col-span-2 mx-auto">
-            {/*  */}
-            <div className="flex mb-5 bg-cardinfo1 w-[657px]  py-5 px-8 rounded-xl shadow-md shadow-red-500 items-center">
-              <div className="grid grid-cols-5 gap-10">
-                <div className="col-span-1">
-                  <div className="w-[80px] h-full bg-cardmini1 border-2 border-red-50 rounded-xl">
-                    <div className="text-center text-white font-bold mt-2">
-                      <h3 className="text-[18px]">No.</h3>
-                      <h3 className="text-[18px]">Paslon</h3>
-                      <h5 className="text-[40px]">3</h5>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-span-4 items-center">
-                  <div className="leading-[45px] mt-5">
-                    <h2 className="text-[48px] font-extrabold text-outline text-cardmini1">
-                      ARIS DEPOK
-                    </h2>
-                    <h2 className="text-[48px] font-extrabold text-outline text-cardmini1">
-                      78%
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/*  */}
+            <CardPaslon />
 
             {/*  */}
-            <div className="flex mb-5 bg-cardinfo2 w-[657px]  py-5 px-8 rounded-xl shadow-md shadow-yellow-500 items-center">
-              <div className="grid grid-cols-5 gap-10">
-                <div className="col-span-1">
-                  <div className="w-[80px] h-full bg-cardmini2 border-2 border-red-50 rounded-xl">
-                    <div className="text-center text-white font-bold mt-2">
-                      <h3 className="text-[18px]">No.</h3>
-                      <h3 className="text-[18px]">Paslon</h3>
-                      <h5 className="text-[40px]">1</h5>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="col-span-4 items-center">
-                  <div className="leading-[45px] mt-5">
-                    <h2 className="text-[48px] font-extrabold text-outline text-cardmini2 ">
-                      REZA KICAU MANIA
-                    </h2>
-                    <h2 className="text-[48px] font-extrabold text-outline text-cardmini2 ">
-                      45%
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/*  */}
-
-            {/*  */}
-            <div className="flex mb-5 bg-cardinfo3 w-[657px]  py-5 px-8 rounded-xl shadow-md shadow-cyan-600 items-center">
-              <div className="grid grid-cols-5 gap-10">
-                <div className="col-span-1">
-                  <div className="w-[80px] h-full bg-cardmini3 border-2 border-red-50 rounded-xl">
-                    <div className="text-center text-white font-bold mt-2">
-                      <h3 className="text-[18px]">No.</h3>
-                      <h3 className="text-[18px]">Paslon</h3>
-                      <h5 className="text-[40px]">2</h5>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-span-4 items-center">
-                  <div className="leading-[45px] mx-auto mt-5">
-                    <h2 className="text-[48px] font-extrabold text-outline text-cardmini3 ">
-                      RIYAN GRACIAS
-                    </h2>
-                    <h2 className="text-[48px] font-extrabold text-outline text-cardmini3 ">
-                      25%
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/*  */}
             {/* conditional select paslon */}
             {pilih === false ? (
               <button
@@ -297,6 +276,47 @@ YANG PENTING TIDAK MELEGALKAN SLOT"
 };
 
 export default InfoPemiluPage;
+
+const CardPaslon = () => {
+  return (
+    <>
+      {data.map((item) => (
+        <div
+          className={`flex mb-5 w-[657px] ${item.bgCard}  py-5 px-8 rounded-xl shadow-md ${item.bgShadow} items-center`}
+        >
+          <div className="grid grid-cols-5 gap-10">
+            <div className="col-span-1">
+              <div
+                className={`w-[80px] h-full ${item.bgCardMini} border-2 border-red-50 rounded-xl`}
+              >
+                <div className="text-center text-white font-bold mt-2">
+                  <h3 className="text-[18px]">No.</h3>
+                  <h3 className="text-[18px]">Paslon</h3>
+                  <h5 className="text-[40px]">{item.nomorUrut}</h5>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-span-4 items-center">
+              <div className="leading-[45px] mt-5">
+                <h2
+                  className={`text-[48px] font-extrabold text-outline ${item.colorName}`}
+                >
+                  {item.namaPaslon}
+                </h2>
+                <h2
+                  className={`text-[48px] font-extrabold text-outline ${item.colorName}`}
+                >
+                  {item.presentase} %
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+};
 
 {
   /* {onSelect ? ( */
