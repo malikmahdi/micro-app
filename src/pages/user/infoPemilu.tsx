@@ -2,6 +2,7 @@ import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+// import CarouselPage from "../../components/layouts/carousel";
 import Address from "../../components/layouts/address";
 import Footer from "../../components/layouts/footer";
 import Navbar from "../../components/layouts/navbar";
@@ -13,6 +14,7 @@ import Monyet1 from "../../assets/monyet-1.png";
 import Monyet2 from "../../assets/monyet-2.png";
 import ModalPaslon from "../../components/layouts/modalPaslon";
 import Pie from "../../components/elements/pieChart";
+import CarouselPage from "../../components/layouts/carousel";
 
 const data = [
   {
@@ -202,60 +204,12 @@ const InfoPemiluPage = () => {
       </div>
       {/* Section-Carousel */}
       <section className="bg-dasar">
-        <div className="px-36 py-20">
+        <div className="px-16 py-20">
           <div className="text-center mb-20">
             <h1 className="text-btn font-extrabold text-5xl">INFO PASLON</h1>
           </div>
-          <div className="shadow-lg shadow-neutral-500 rounded-xl">
-            <Slider {...settings}>
-              {data.map((d) => (
-                <div className="bg-white  p-16 rounded-xl">
-                  <div className="grid grid-cols-3 gap-16">
-                    <div className="col-span-1">
-                      <div>
-                        <img
-                          src={Monyet1}
-                          className="bg-cover rounded-xl"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-
-                    {/* col-span-3 */}
-                    <div className="col-span-2 flex flex-col">
-                      <div>
-                        <div className="leading-9">
-                          <h5 className="text-[24px] font-bold">
-                            Nomor Urut : {d.nomorUrut}
-                          </h5>
-                          <h2 className="text-[40px] font-bold text-red-900">
-                            {d.namaPaslon}
-                          </h2>
-                        </div>
-
-                        <div className="text-[24px]">
-                          <p className="mt-8">Visi & Misi</p>
-                          <ul className="list-disc list-inside">
-                            <li>Memindahkan Indonesia ke Isekai.</li>
-                            <li>Nonton anime 3x sehari.</li>
-                            <li>Melakukan peresapan pada budaya jepang.</li>
-                          </ul>
-
-                          <p className="mt-8">Koalisi</p>
-                          <ul className="list-disc list-inside">
-                            <li>Partai Persatuan Wiboo.</li>
-                            <li>Partai Redbull.</li>
-                            <li>Partai Black Magic.</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    {/* col-span-3 */}
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
+          <CarouselPage />
+          <div className="shadow-lg shadow-neutral-500 rounded-xl"></div>
         </div>
       </section>
       {/* section-carousel */}

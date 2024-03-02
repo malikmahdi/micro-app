@@ -11,11 +11,11 @@ type PropsAdm = {
 
 const listNav = [
   {
-    linkTo: "/form-partai",
+    linkTo: "/list-partai",
     link: "Partai",
   },
   {
-    linkTo: "/form-paslon",
+    linkTo: "/list-paslon",
     link: "Paslon",
   },
 ];

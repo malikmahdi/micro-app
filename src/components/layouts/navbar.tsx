@@ -11,11 +11,11 @@ type Props = {
 
 const listNav = [
   {
-    linkTo: "/list-partai",
+    linkTo: "#",
     link: "Partai",
   },
   {
-    linkTo: "/list-paslon",
+    linkTo: "/#",
     link: "Paslon",
   },
   {

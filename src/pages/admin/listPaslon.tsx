@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
 import Monyet2 from "../../assets/monyet-2.png";
-import Navbar from "../../components/layouts/navbar";
+import NavbarAdmin from "../../components/layouts/navbarAdmin";
+import { FaPlus } from "react-icons/fa";
 
 const ListPaslonPage = () => {
   return (
     <>
-      <Navbar
+      <NavbarAdmin
         tittleNav="
-        PEMILU PRESIDEN DUMBWAYS.ID
+        DASHBOARD PEMILU
           "
       />
       <div className="px-36">
@@ -14,6 +16,17 @@ const ListPaslonPage = () => {
           <div className="text-center mt-8">
             <h1 className="text-btn font-extrabold text-5xl">LIST PASLON</h1>
           </div>
+        </div>
+
+        <div className="flex justify-end">
+          <Link to="/form-paslon">
+            <button className="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-md">
+              <span className="flex items-center gap-1">
+                <FaPlus />
+                Paslon
+              </span>
+            </button>
+          </Link>
         </div>
 
         <div className="mt-5 mb-10 mx-auto text-center">
