@@ -32,13 +32,11 @@ const Navbar = (props: Props) => {
   const [userLogin, setUserLogin] = useState(false);
 
   const handleLogin = (): void => {
-    // e.preventDefault();
     setOpenLogin(true);
     setOpenRegister(false);
   };
 
   const handleRegister = (): void => {
-    // e.preventDefault();
     setOpenLogin(false);
     setOpenRegister(true);
   };
@@ -50,7 +48,7 @@ const Navbar = (props: Props) => {
   };
 
   return (
-    <nav className="flex items-center justify-between bg-black lg:px-36 py-6 ">
+    <nav className="flex items-center justify-between bg-black lg:px-36 py-6">
       <div className="logo flex items-center gap-5">
         <img src={logoDw} className="h-11" alt="" />
         <Link to="/">
@@ -81,6 +79,50 @@ const Navbar = (props: Props) => {
           </button>
         )}
       </div>
+
+      <ModalLogin
+        open={openLogin}
+        onClose={() => {
+          setOpenLogin(false);
+        }}
+      >
+        <div className="flex justify-center  items-center">
+          <div className="w-96">
+            <h1 className="text-btn font-extrabold text-4xl my-10 text-center">
+              LOGIN
+            </h1>
+            <form action="" className="mt-5">
+              <InputGroup
+                label="Username :"
+                type="username"
+                name="username"
+                placeholder="example@gmail.com"
+              ></InputGroup>
+              <InputGroup
+                label="Password :"
+                type="password"
+                name="password"
+                placeholder="************"
+              ></InputGroup>
+              <button
+                onClick={loginUser}
+                className="bg-btn hover:bg-[#74711d] text-white font-bold px-8 py-2 w-full rounded-md"
+              >
+                SUBMIT
+              </button>
+            </form>
+            <p className="text-sm text-black text-center mt-10">
+              Don't have an account?{" "}
+              <button
+                onClick={handleRegister}
+                className="font-bold text-[#3B93A6] hover:text-green-900"
+              >
+                Register
+              </button>
+            </p>
+          </div>
+        </div>
+      </ModalLogin>
 
       <ModalRegister
         open={openRegister}
@@ -145,49 +187,6 @@ const Navbar = (props: Props) => {
           </div>
         </div>
       </ModalRegister>
-      <ModalLogin
-        open={openLogin}
-        onClose={() => {
-          setOpenLogin(false);
-        }}
-      >
-        <div className="flex justify-center  items-center">
-          <div className="w-96">
-            <h1 className="text-btn font-extrabold text-4xl my-10 text-center">
-              LOGIN
-            </h1>
-            <form action="" className="mt-5">
-              <InputGroup
-                label="Username :"
-                type="username"
-                name="username"
-                placeholder="example@gmail.com"
-              ></InputGroup>
-              <InputGroup
-                label="Password :"
-                type="password"
-                name="password"
-                placeholder="************"
-              ></InputGroup>
-              <button
-                onClick={loginUser}
-                className="bg-btn hover:bg-[#74711d] text-white font-bold px-8 py-2 w-full rounded-md"
-              >
-                SUBMIT
-              </button>
-            </form>
-            <p className="text-sm text-black text-center mt-10">
-              Don't have an account?{" "}
-              <button
-                onClick={handleRegister}
-                className="font-bold text-[#3B93A6] hover:text-green-900"
-              >
-                Register
-              </button>
-            </p>
-          </div>
-        </div>
-      </ModalLogin>
     </nav>
   );
 };
