@@ -6,12 +6,13 @@ import { User } from "../entity/User";
 export default new (class UserService {
   repository = AppDataSource.getRepository(User);
 
+  // ---------------------- Create -------------------------------
   async create(reqBody: any): Promise<any> {
     try {
-      const user = this.repository.create({
+      const data_user = this.repository.create({
         fullname: reqBody.fullname,
-        alamat: reqBody.alamat,
-        jenis_kelamin: reqBody.jenis_kelamin,
+        address: reqBody.address,
+        gender: reqBody.gender,
         username: reqBody.username,
         password: reqBody.password,
       });
@@ -20,20 +21,21 @@ export default new (class UserService {
         .createQueryBuilder()
         .insert()
         .into(User)
-        .values(user)
+        .values(data_user)
         .execute();
 
-      console.log(user);
-      return user;
+      console.log(data_user);
+      return data_user;
     } catch (error) {
       throw error;
     }
   }
 
+  // ---------------------- Find -------------------------------
   async find(): Promise<any> {
     try {
       const users = await AppDataSource.getRepository(User)
-        .createQueryBuilder("user")
+        .createQueryBuilder("ini user")
         .getMany();
       return users;
     } catch (error) {
@@ -41,117 +43,54 @@ export default new (class UserService {
     }
   }
 
-  // async patch(id: number): Promise<any> {
-  //   try {
-  //     const user = this.repository.create({
-  //       fullname: reqBody.fullname,
-  //       alamat: reqBody.alamat,
-  //       jenis_kelamin: reqBody.jenis_kelamin,
-  //       username: reqBody.username,
-  //       password: reqBody.password,
-  //     });
-
-  //     await AppDataSource.createQueryBuilder()
-  //       .update(User)
-  //       .set({ firstName: "Timber", lastName: "Saw" })
-  //       .where("id = :id", { id: 1 })
-  //       .execute();
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
-
+  // ---------------------- Update -------------------------------
   async update(
-    reqBody: {
-      fullname: any;
-      alamat: any;
-      jenis_kelamin: any;
-      username: any;
-      password: any;
+    body: {
+      fullname: string;
+      address: string;
+      gender: string;
+      username: string;
+      password: string;
     },
     id: number
   ): Promise<any> {
     try {
-      const Update = this.repository.create({
-        fullname: reqBody.fullname,
-        alamat: reqBody.alamat,
-        jenis_kelamin: reqBody.jenis_kelamin,
-        username: reqBody.username,
-        password: reqBody.password,
-      });
-      const userUpdate = await this.repository.findOne({
-        where: {
-          id,
-        },
-      });
-
-      if (!userUpdate) {
-        throw new Error("User not found!");
-      }
-
-      await this.repository.update({ id }, Update);
-      AppDataSource.createQueryBuilder()
+      const user_update = await AppDataSource.createQueryBuilder()
         .update(User)
-        .set(Update)
-        .where(userUpdate)
+        .set({
+          fullname: body.fullname,
+          address: body.address,
+          gender: body.gender,
+          username: body.username,
+          password: body.password,
+        })
+        .where("id = :id", { id: id })
         .execute();
+
+      // if (!user_update) {
+      //   throw new Error("User not found!");
+      // }
+
+      return user_update;
     } catch (error) {
       throw error;
     }
   }
 
-  async patch(
-    reqBody: {
-      fullname: any;
-      alamat: any;
-      jenis_kelamin: any;
-      username: any;
-      password: any;
-    },
-    id: number
-  ): Promise<any> {
-    try {
-      const Update = this.repository.create({
-        fullname: reqBody.fullname,
-        alamat: reqBody.alamat,
-        jenis_kelamin: reqBody.jenis_kelamin,
-        username: reqBody.username,
-        password: reqBody.password,
-      });
-      const userUpdate = await this.repository.findOne({
-        where: {
-          id,
-        },
-      });
-
-      if (!userUpdate) {
-        throw new Error("User not found!");
-      }
-
-      await this.repository.update({ id }, Update);
-      AppDataSource.createQueryBuilder()
-        .update(User)
-        .set(Update)
-        .where(userUpdate)
-        .execute();
-    } catch (error) {
-      throw error;
-    }
-  }
-
+  // ---------------------- Delete -------------------------------
   async delete(id: number): Promise<User> {
     try {
-      const user = await this.repository.findOne({
+      const data_user = await this.repository.findOne({
         where: {
           id,
         },
       });
 
-      if (!user) {
+      if (!data_user) {
         throw new Error("User not found!");
       }
 
-      await this.repository.remove(user);
+      await this.repository.remove(data_user);
 
       await AppDataSource.getRepository(User)
         .createQueryBuilder()
@@ -160,7 +99,7 @@ export default new (class UserService {
         .where("id = :id", { id: 1 })
         .execute();
 
-      return user;
+      return data_user;
     } catch (error) {
       throw error;
     }

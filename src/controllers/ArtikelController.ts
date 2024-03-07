@@ -23,6 +23,20 @@ export default new (class ArtikelController {
     }
   }
 
+  async update(req: Request, res: Response): Promise<Response> {
+    try {
+      const artikel_id = parseInt(req.params.id);
+      const { body } = req;
+      await ArtikelService.update(body, artikel_id);
+
+      return res
+        .status(200)
+        .json({ message: "Update Success", data: { id: artikel_id, ...body } });
+    } catch (error) {
+      return res.status(500).json({ message: error });
+    }
+  }
+
   async delete(req: Request, res: Response): Promise<Response> {
     try {
       const id = parseInt(req.params.id);
@@ -32,7 +46,7 @@ export default new (class ArtikelController {
       return res.status(200).send("Data berhasil dihapus");
     } catch (error) {
       return res.status(500).json({
-        message: error,
+        message: "Data not found!",
       });
     }
   }

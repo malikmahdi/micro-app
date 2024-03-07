@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Article } from "./Article";
 // import { Blog } from "./Blog";
 
 @Entity()
@@ -10,10 +11,10 @@ export class User {
   fullname: string;
 
   @Column()
-  alamat: string;
+  address: string;
 
   @Column()
-  jenis_kelamin: string;
+  gender: string;
 
   @Column()
   username: string;
@@ -21,6 +22,6 @@ export class User {
   @Column()
   password: string;
 
-  // @OneToMany(() => Blog, (blog) => blog.user)
-  // blog: Blog[];
+  @OneToMany(() => Article, (article) => article.user)
+  article: Article[];
 }

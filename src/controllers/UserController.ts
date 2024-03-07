@@ -27,36 +27,17 @@ export default new (class UserController {
 
   async update(req: Request, res: Response): Promise<Response> {
     try {
-      const user_id = parseInt(req.params.id);
-      const userUpdate = await UserService.update(req.body, user_id);
+      const id = parseInt(req.params.id);
+      const { body } = req;
+      await UserService.update(body, id);
 
-      return res.status(200).json(userUpdate);
+      return res
+        .status(200)
+        .json({ message: "Update success", data: { id: id, ...body } });
     } catch (error) {
       return res.status(500).json({ message: "Update Error" });
     }
   }
-
-  async patch(req: Request, res: Response): Promise<Response> {
-    try {
-      const user_id = parseInt(req.params.id);
-      const userUpdate = await UserService.patch(req.body, user_id);
-
-      return res.status(200).json(userUpdate);
-    } catch (error) {
-      return res.status(500).json({ message: "Update Error" });
-    }
-  }
-
-  // async patch(req: Request, res: Response): Promise<Response> {
-  //   try {
-  //     const data = req.body;
-  //     const users = await UserService.patch(data);
-
-  //     return res.status(200).json(users);
-  //   } catch (error) {
-  //     return res.status(500).json({ message: error });
-  //   }
-  // }
 
   async delete(req: Request, res: Response): Promise<Response> {
     try {
