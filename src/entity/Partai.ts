@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Paslon } from "./Paslon";
 
 @Entity()
 export class Partai {
@@ -6,14 +7,20 @@ export class Partai {
   id: number;
 
   @Column()
-  nama: string;
+  name: string;
 
   @Column()
-  ketua_umum: string;
+  logo: string;
+
+  @Column()
+  chairman: string;
 
   @Column()
   visi_misi: string;
 
   @Column()
-  alamat: string;
+  address: string;
+
+  // @ManyToOne(() => Paslon, (paslon) => paslon.partai)
+  // paslon: Paslon;
 }

@@ -34,10 +34,22 @@ export default new (class UserService {
   // ---------------------- Find -------------------------------
   async find(): Promise<any> {
     try {
-      const users = await AppDataSource.getRepository(User)
-        .createQueryBuilder("ini user")
-        .getMany();
+      const users = await this.repository.createQueryBuilder("user").getMany();
       return users;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // ---------------------- Find One -------------------------------
+  async findOne(id: number): Promise<any> {
+    try {
+      const user = await this.repository
+        .createQueryBuilder("user")
+        .where("user.id = :id", { id: id })
+        .getOne();
+
+      return user;
     } catch (error) {
       throw error;
     }

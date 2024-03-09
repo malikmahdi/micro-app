@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Paslon {
@@ -13,4 +13,9 @@ export class Paslon {
 
   @Column()
   visi_misi: string;
+
+  @Column({ name: "partai.id" })
+  partai_id: number;
+
+  // @OneToMany(() => Partai, (partai) => )
 }

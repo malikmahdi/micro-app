@@ -2,29 +2,30 @@ import { Response } from "express";
 import { AppDataSource } from "../data-source";
 import { Article } from "../entity/Article";
 
-export default new (class ArtikelService {
+export default new (class ArticleService {
   repository = AppDataSource.getRepository(Article);
 
   async create(reqBody: any): Promise<any> {
     try {
-      const artikel = this.repository.create({
+      const article = this.repository.create({
         title: reqBody.title,
         slug: reqBody.slug,
         date_published: reqBody.date_published,
         image: reqBody.image,
         description: reqBody.description,
         created_at: reqBody.created_at,
+        userId: reqBody.userId,
       });
 
       await AppDataSource.getRepository(Article)
         .createQueryBuilder()
         .insert()
         .into(Article)
-        .values(artikel)
+        .values(article)
         .execute();
 
-      console.log(artikel);
-      return artikel;
+      console.log(article);
+      return article;
     } catch (error) {
       throw error;
     }
@@ -32,13 +33,28 @@ export default new (class ArtikelService {
 
   async find(): Promise<any> {
     try {
-      const artikel = await AppDataSource.getRepository(Article)
-        .createQueryBuilder("artikel")
+      const article = await this.repository
+        .createQueryBuilder("article")
+        .innerJoinAndSelect("article.user", "user")
         .getMany();
 
-      return artikel;
+      return article;
     } catch (error) {
       throw error;
+    }
+  }
+
+  async findOne(id: number): Promise<any> {
+    try {
+      const article = await this.repository
+        .createQueryBuilder("article")
+        .innerJoinAndSelect("article.user", "user")
+        .where("article.id = :id", { id: id })
+        .getOne();
+
+      return article;
+    } catch (error) {
+      throw new Error("Data article tidak ditemukan");
     }
   }
 
@@ -55,7 +71,7 @@ export default new (class ArtikelService {
     id: number
   ): Promise<any> {
     try {
-      const updateArtikel = await AppDataSource.createQueryBuilder()
+      const updateArticle = await AppDataSource.createQueryBuilder()
         .update(Article)
         .set({
           title: reqBody.title,
@@ -74,17 +90,17 @@ export default new (class ArtikelService {
 
   async delete(id: number): Promise<Article> {
     try {
-      const artikel = await this.repository.findOne({
+      const article = await this.repository.findOne({
         where: {
           id,
         },
       });
 
-      if (!artikel) {
-        throw new Error("artikel not found!");
+      if (!article) {
+        throw new Error("article not found!");
       }
 
-      await this.repository.remove(artikel);
+      await this.repository.remove(article);
 
       await AppDataSource.getRepository(Article)
         .createQueryBuilder()
@@ -93,7 +109,7 @@ export default new (class ArtikelService {
         .where("id = :id", { id: 1 })
         .execute();
 
-      return artikel;
+      return article;
     } catch (error) {
       throw error;
     }

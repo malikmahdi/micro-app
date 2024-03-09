@@ -7,13 +7,14 @@ export default new (class PartaiService {
   async create(reqBody: any): Promise<any> {
     try {
       const partai = this.repository.create({
-        nama: reqBody.nama,
-        ketua_umum: reqBody.ketua_umum,
+        name: reqBody.name,
+        logo: reqBody.logo,
+        chairman: reqBody.chairman,
         visi_misi: reqBody.visi_misi,
-        alamat: reqBody.alamat,
+        address: reqBody.address,
       });
 
-      await AppDataSource.getRepository(Partai)
+      await this.repository
         .createQueryBuilder()
         .insert()
         .into(Partai)
@@ -27,15 +28,52 @@ export default new (class PartaiService {
     }
   }
 
-  async find(): Promise<any> {
+  async findAll(): Promise<any> {
     try {
-      const partaiAll = await AppDataSource.getRepository(Partai)
+      const partaiAll = await this.repository
         .createQueryBuilder("partai")
         .getMany();
       return partaiAll;
     } catch (error) {
       throw error;
     }
+  }
+
+  async findOne(id: number): Promise<any> {
+    try {
+      const partai = await this.repository
+        .createQueryBuilder()
+        .where("partai.id = :id", { id: id })
+        .getOne();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async update(
+    reqBody: {
+      name: string;
+      logo: string;
+      chairman: string;
+      visi_misi: string;
+      address: string;
+    },
+    id: number
+  ): Promise<any> {
+    try {
+      const updatePartai = await this.repository
+        .createQueryBuilder()
+        .update(Partai)
+        .set({
+          name: reqBody.name,
+          logo: reqBody.logo,
+          chairman: reqBody.chairman,
+          visi_misi: reqBody.visi_misi,
+          address: reqBody.address,
+        })
+        .where("id = :id", { id: id })
+        .execute();
+    } catch (error) {}
   }
 
   async delete(id: number): Promise<Partai> {

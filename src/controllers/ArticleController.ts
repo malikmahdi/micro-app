@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import ArtikelService from "../services/ArtikelService";
+import ArticleService from "../services/ArticleService";
 
-export default new (class ArtikelController {
+export default new (class ArticleController {
   async create(req: Request, res: Response): Promise<Response> {
     try {
       const data = req.body;
-      const artikel = await ArtikelService.create(data);
+      const article = await ArticleService.create(data);
 
-      return res.status(200).json(artikel);
+      return res.status(200).json(article);
     } catch (error) {
       return res.status(500).json({ message: error });
     }
@@ -15,23 +15,34 @@ export default new (class ArtikelController {
 
   async find(req: Request, res: Response): Promise<Response> {
     try {
-      const artikels = await ArtikelService.find();
+      const articles = await ArticleService.find();
 
-      return res.status(200).json(artikels);
+      return res.status(200).json({ articles });
     } catch (error) {
       return res.status(500).json({ message: error });
     }
   }
 
+  async findOne(req: Request, res: Response): Promise<Response> {
+    try {
+      const id = parseInt(req.params.id);
+      const article = await ArticleService.findOne(id);
+
+      return res.status(200).json({ message: "Get One success", article });
+    } catch (error) {
+      return res.status(500).json({ messagse: "Data article not found!" });
+    }
+  }
+
   async update(req: Request, res: Response): Promise<Response> {
     try {
-      const artikel_id = parseInt(req.params.id);
+      const article_id = parseInt(req.params.id);
       const { body } = req;
-      await ArtikelService.update(body, artikel_id);
+      await ArticleService.update(body, article_id);
 
       return res
         .status(200)
-        .json({ message: "Update Success", data: { id: artikel_id, ...body } });
+        .json({ message: "Update Success", data: { id: article_id, ...body } });
     } catch (error) {
       return res.status(500).json({ message: error });
     }
@@ -41,7 +52,7 @@ export default new (class ArtikelController {
     try {
       const id = parseInt(req.params.id);
 
-      await ArtikelService.delete(id);
+      await ArticleService.delete(id);
 
       return res.status(200).send("Data berhasil dihapus");
     } catch (error) {

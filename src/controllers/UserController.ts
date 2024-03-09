@@ -25,6 +25,17 @@ export default new (class UserController {
     }
   }
 
+  async findOne(req: Request, res: Response): Promise<Response> {
+    try {
+      const id = parseInt(req.params.id);
+      const user = await UserService.findOne(id);
+
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500).json({ message: "Data user gagal ditemukan" });
+    }
+  }
+
   async update(req: Request, res: Response): Promise<Response> {
     try {
       const id = parseInt(req.params.id);
@@ -48,7 +59,7 @@ export default new (class UserController {
       return res.status(200).send("Data berhasil dihapus");
     } catch (error) {
       return res.status(500).json({
-        message: error,
+        message: error + "Data has been deleted",
       });
     }
   }
