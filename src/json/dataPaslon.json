@@ -1,0 +1,29 @@
+[
+  {
+    "no": 1,
+    "name": "ARIS DEPOK",
+    "akumulasi": "45%",
+    "totalVoter": "117 Voters",
+    "bgCard": "bg-[#FACD55]",
+    "colorText": "text-[#5D5517]",
+    "colorBorder": "border-[#5D5517]"
+  },
+  {
+    "no": 2,
+    "name": "REZA KICAU MANIA",
+    "akumulasi": "75%",
+    "totalVoter": "300 Voters",
+    "bgCard": "bg-[#6EFAF5]",
+    "colorText": "text-[#21585D]",
+    "colorBorder": "border-[#21585D]"
+  },
+  {
+    "no": 3,
+    "name": "RIYAN GRACIAS",
+    "akumulasi": "45%",
+    "totalVoter": "117 Voters",
+    "bgCard": "bg-[#EE5354]",
+    "colorText": "text-[#5D100E]",
+    "colorBorder": "border-[#5D100E]"
+  }
+]

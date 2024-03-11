@@ -1,0 +1,10 @@
+[
+  {
+    "linkTo": "/list-partai",
+    "list": "Partai"
+  },
+  {
+    "linkTo": "/list-paslon",
+    "list": "Paslon"
+  }
+]

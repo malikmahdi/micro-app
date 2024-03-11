@@ -1,76 +1,19 @@
-// tinggal ganti bg tiap card paslon
-
-import Monyet2 from "../../assets/monyet-2.png";
+import Navbar from "../../components/layouts/navbar";
+// image
 import Person1 from "../../assets/person.jpg";
-import NavbarAdmin from "../../components/layouts/navbarAdmin";
-
-const dataPaslon = [
-  {
-    no: 1,
-    name: "ARIS DEPOK",
-    akumulasi: "45%",
-    totalVoter: "117 Voters",
-    bgCard: "bg-[#FACD55]",
-    colorText: "text-[#5D5517]",
-    colorBorder: "border-[#5D5517]",
-  },
-  {
-    no: 2,
-    name: "REZA KICAU MANIA",
-    akumulasi: "75%",
-    totalVoter: "300 Voters",
-    bgCard: "bg-[#6EFAF5]",
-    colorText: "text-[#21585D]",
-    colorBorder: "border-[#21585D]",
-  },
-  {
-    no: 3,
-    name: "RIYAN GRACIAS",
-    akumulasi: "45%",
-    totalVoter: "117 Voters",
-    bgCard: "bg-[#EE5354]",
-    colorText: "text-[#5D100E]",
-    colorBorder: "border-[#5D100E]",
-  },
-];
-
-const dataVoter = [
-  {
-    no: 1,
-    nama: "Alif Angga",
-    alamat: "Jakarta Timur",
-    gender: "Laki-laki",
-    paslon: "Aris Depok",
-  },
-  {
-    no: 2,
-    nama: "Ahmad Firdaus",
-    alamat: "Jakarta Pusat",
-    gender: "Laki-laki",
-    paslon: "Reza Kicau Mania",
-  },
-  {
-    no: 3,
-    nama: "Agun Prabowo",
-    alamat: "Jakarta Selatan",
-    gender: "Laki-laki",
-    paslon: "Riyan Gracias",
-  },
-  {
-    no: 4,
-    nama: "Malik Mahdi",
-    alamat: "Jakarta Utara",
-    gender: "Laki-laki",
-    paslon: "Aris Depok",
-  },
-];
+// json
+import listAdminNav from "../../json/listAdminNav.json";
+import dataPaslon from "../../json/dataPaslon.json";
+import dataVoter from "../../json/dataVoter.json";
 
 const DashboardPage = () => {
   return (
     <>
-      <NavbarAdmin
-        tittleNav="
-          DASHBOARD PEMILU"
+      <Navbar
+        titleNavbar="
+          DASHBOARD PEMILU
+          "
+        listItem={listAdminNav}
       />
       <div className="px-36 my-20">
         <h1 className="text-btn font-bold text-[40px] my-16 text-center">

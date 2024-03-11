@@ -1,31 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { InterfaceNavbar } from "../interface/inavbar.ts";
 import logoDw from "../../assets/logo-dw.png";
 import InputGroup from "../elements/inputGroup.tsx";
 import ModalLogin from "./modalLogin";
 import ModalRegister from "./modalRegister";
 
-type Props = {
-  tittleNav: string;
-};
-
-const listNav = [
-  {
-    linkTo: "#",
-    link: "Partai",
-  },
-  {
-    linkTo: "/#",
-    link: "Paslon",
-  },
-  {
-    linkTo: "/info-pemilu",
-    link: "Voting",
-  },
-];
-
-const Navbar = (props: Props) => {
-  const { tittleNav } = props;
+const Navbar = (props: InterfaceNavbar) => {
+  const { titleNavbar, listItem } = props;
 
   const [openLogin, setOpenLogin] = useState(false);
   const [openRegister, setOpenRegister] = useState(false);
@@ -52,17 +34,19 @@ const Navbar = (props: Props) => {
       <div className="logo flex items-center gap-5">
         <img src={logoDw} className="h-11" alt="" />
         <Link to="/">
-          <h4 className="text-white font-bold text-2xl">{tittleNav}</h4>
+          <h4 className="text-white font-bold text-2xl">{titleNavbar}</h4>
         </Link>
       </div>
       <div className="flex items-center gap-3">
-        {listNav.map((items, index) => (
-          <ul className="flex text-white gap-3">
-            <li>
-              <Link to={items.linkTo}> {items.link} </Link>
-            </li>
-            {index < listNav.length - 1 && <li className="">|</li>}
-          </ul>
+        {listItem.map((item, index) => (
+          <React.Fragment key={index}>
+            <ul className="flex text-white gap-3" key={index}>
+              <Link to={item.linkTo}>
+                <li>{item.list}</li>
+              </Link>
+              {index < listItem.length - 1 && <li className="">|</li>}
+            </ul>
+          </React.Fragment>
         ))}
 
         {userLogin === false ? (

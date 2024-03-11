@@ -1,13 +1,17 @@
+import Navbar from "../../components/layouts/navbar";
+// image
 import Monyet1 from "../../assets/monyet-1.png";
-import NavbarAdmin from "../../components/layouts/navbarAdmin";
+// json
+import listAdminNav from "../../json/listAdminNav.json";
 
 const FormPaslonPage = () => {
   return (
     <>
-      <NavbarAdmin
-        tittleNav="
+      <Navbar
+        titleNavbar="
           DASHBOARD PEMILU
           "
+        listItem={listAdminNav}
       />
       <div className="px-36 py-16">
         <div className="text-center mt-8 mb-24">

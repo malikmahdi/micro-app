@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
-import Monyet2 from "../../assets/monyet-2.png";
-// import Navbar from "../../components/layouts/navbar";
-import NavbarAdmin from "../../components/layouts/navbarAdmin";
 import { FaPlus } from "react-icons/fa";
+import Navbar from "../../components/layouts/navbar";
+// image
+import Monyet2 from "../../assets/monyet-2.png";
+// json
+import listAdminNav from "../../json/listAdminNav.json";
 
 const ListPartaiPage = () => {
   return (
     <>
-      <NavbarAdmin
-        tittleNav="
-        DASHBOARD PEMILU
+      <Navbar
+        titleNavbar="
+          DASHBOARD PEMILU
           "
+        listItem={listAdminNav}
       />
       <div className="px-36">
         <div className="px-36 py-16">

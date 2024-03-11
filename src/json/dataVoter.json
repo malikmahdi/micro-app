@@ -1,0 +1,30 @@
+[
+  {
+    "no": 1,
+    "nama": "Alif Angga",
+    "alamat": "Jakarta Timur",
+    "gender": "Laki-laki",
+    "paslon": "Aris Depok"
+  },
+  {
+    "no": 2,
+    "nama": "Ahmad Firdaus",
+    "alamat": "Jakarta Pusat",
+    "gender": "Laki-laki",
+    "paslon": "Reza Kicau Mania"
+  },
+  {
+    "no": 3,
+    "nama": "Agun Prabowo",
+    "alamat": "Jakarta Selatan",
+    "gender": "Laki-laki",
+    "paslon": "Riyan Gracias"
+  },
+  {
+    "no": 4,
+    "nama": "Malik Mahdi",
+    "alamat": "Jakarta Utara",
+    "gender": "Laki-laki",
+    "paslon": "Aris Depok"
+  }
+]

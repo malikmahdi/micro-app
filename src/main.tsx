@@ -11,12 +11,17 @@ import DashboardPage from "./pages/admin/dashboard.tsx";
 import InfoPemiluPage from "./pages/user/infoPemilu.tsx";
 import BeritaPage from "./pages/user/berita.tsx";
 import ErrorPage from "./pages/error.tsx";
+import FormArticlePage from "./pages/admin/addArtcile.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeUnLogin />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/form-article",
+    element: <FormArticlePage />,
   },
   {
     path: "/form-paslon",
@@ -35,7 +40,7 @@ const router = createBrowserRouter([
     element: <ListPartaiPage />,
   },
   {
-    path: "/info-pemilu",
+    path: "/voting",
     element: <InfoPemiluPage />,
   },
   {

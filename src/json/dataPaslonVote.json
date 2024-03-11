@@ -1,0 +1,29 @@
+[
+  {
+    "nomorUrut": 1,
+    "namaPaslon": "ARIS DEPOK",
+    "presentase": 60,
+    "bgCard": "bg-cardinfo1",
+    "bgCardMini": "bg-[#5D100E]",
+    "colorName": "text-[#5D100E]",
+    "bgShadow": "shadow-red-500"
+  },
+  {
+    "nomorUrut": 2,
+    "namaPaslon": "REZA KICAW MANIA",
+    "presentase": 25,
+    "bgCard": "bg-cardinfo2",
+    "bgCardMini": "bg-[#5D5517]",
+    "colorName": "text-[#5D5517]",
+    "bgShadow": "shadow-yellow-500"
+  },
+  {
+    "nomorUrut": 3,
+    "namaPaslon": "RIYAN GRACIAS",
+    "presentase": 15,
+    "bgCard": "bg-cardinfo3",
+    "bgCardMini": "bg-[#255D4E]",
+    "colorName": "text-[#255D4E]",
+    "bgShadow": "shadow-cyan-600"
+  }
+]

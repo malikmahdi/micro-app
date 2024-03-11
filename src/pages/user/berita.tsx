@@ -2,16 +2,20 @@ import Address from "../../components/layouts/address";
 import Footer from "../../components/layouts/footer";
 import Navbar from "../../components/layouts/navbar";
 
-import ImgKpu from "../../assets/img-kpu.png";
 import { Link } from "react-router-dom";
+// image
+import ImgKpu from "../../assets/img-kpu.png";
+// json
+import listUserNav from "../../json/listUserNav.json";
 
 const BeritaPage = () => {
   return (
     <>
       <Navbar
-        tittleNav="
+        titleNavbar="
           PEMILU PRESIDEN DUMBWAYS.ID
           "
+        listItem={listUserNav}
       />
 
       <div className="px-36 bg-dasar">
@@ -26,7 +30,7 @@ const BeritaPage = () => {
 
           <div className="text-center mt-8 mb-10 leading-9">
             <h1 className="text-btn font-bold text-[40px]">
-              KPU DUMBWAYS TETAPKAN 3 MENTOR TERBAIK{" "}
+              KPU DUMBWAYS TETAPKAN 3 MENTOR TERBAIK
             </h1>
             <p className="text-[24px] font-light">Super Admin</p>
             <p className="text-[24px] font-light">Senin, 03 Jan 2023</p>

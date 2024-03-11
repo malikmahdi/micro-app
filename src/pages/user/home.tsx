@@ -5,6 +5,8 @@ import Card from "../../components/layouts/card";
 import Statement from "../../components/layouts/statementSection";
 import Address from "../../components/layouts/address";
 import Footer from "../../components/layouts/footer";
+// json
+import listUserNav from "../../json/listUserNav.json";
 
 const HomeUnLogin: React.FC = () => {
   // const [form]
@@ -12,9 +14,10 @@ const HomeUnLogin: React.FC = () => {
     <div className="bg-dasar">
       {/* Navbar */}
       <Navbar
-        tittleNav="
+        titleNavbar="
           PEMILU PRESIDEN DUMBWAYS.ID
           "
+        listItem={listUserNav}
       />
 
       {/* Hero-section */}

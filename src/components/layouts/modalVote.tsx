@@ -58,12 +58,12 @@ const ModalVote = () => {
         </div>
 
         <div className="mt-10 flex gap-5">
-          <button className="bg-white border border-2 border-btn hover:bg-btn hover:text-white  text-btn text-[32px] font-bold px-8 py-1 w-full rounded-xl">
+          <button className="bg-white border-2 border-btn hover:bg-btn hover:text-white  text-btn text-[32px] font-bold px-8 py-1 w-full rounded-xl">
             RESET
           </button>
           <button
             onClick={onVoting}
-            className="bg-white hover:bg-btn hover:text-white border border-2 border-btn text-btn text-[32px] font-bold px-8 py-1 w-full rounded-xl"
+            className="bg-white hover:bg-btn hover:text-white border-2 border-btn text-btn text-[32px] font-bold px-8 py-1 w-full rounded-xl"
           >
             SUBMIT
           </button>

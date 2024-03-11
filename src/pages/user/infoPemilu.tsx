@@ -10,41 +10,15 @@ import Statement from "../../components/layouts/statementSection";
 //
 
 //
-import Monyet1 from "../../assets/monyet-1.png";
 import Monyet2 from "../../assets/monyet-2.png";
 import ModalPaslon from "../../components/layouts/modalPaslon";
 import Pie from "../../components/elements/pieChart";
 import CarouselPage from "../../components/layouts/carousel";
 
-const data = [
-  {
-    nomorUrut: 1,
-    namaPaslon: "ARIS DEPOK",
-    presentase: 60,
-    bgCard: "bg-cardinfo1",
-    bgCardMini: "bg-[#5D100E]",
-    colorName: "text-[#5D100E]",
-    bgShadow: "shadow-red-500",
-  },
-  {
-    nomorUrut: 2,
-    namaPaslon: "REZA KICAW MANIA",
-    presentase: 30,
-    bgCard: "bg-cardinfo2",
-    bgCardMini: "bg-[#5D5517]",
-    colorName: "text-[#5D5517]",
-    bgShadow: "shadow-yellow-500",
-  },
-  {
-    nomorUrut: 3,
-    namaPaslon: "RIYAN GRACIAS",
-    presentase: 10,
-    bgCard: "bg-cardinfo3",
-    bgCardMini: "bg-[#255D4E]",
-    colorName: "text-[#255D4E]",
-    bgShadow: "shadow-cyan-600",
-  },
-];
+import listUserNav from "../../json/listUserNav.json";
+import dataPaslonVote from "../../json/dataPaslonVote.json";
+
+// const data =
 
 function NextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -100,9 +74,10 @@ const InfoPemiluPage = () => {
   return (
     <>
       <Navbar
-        tittleNav="
+        titleNavbar="
           PEMILU PRESIDEN DUMBWAYS.ID
           "
+        listItem={listUserNav}
       />
       <div className="px-36 pb-20">
         <div className="px-36 py-16">
@@ -149,7 +124,7 @@ const InfoPemiluPage = () => {
                     MASUKAN PILIHANMU
                   </h1>
                   <div className="grid grid-cols-3 gap-5">
-                    {data.map((item) => (
+                    {dataPaslonVote.map((item) => (
                       //  {/*  */}
                       <div className="col-span-1 relative">
                         <button className="bg-mvcard rounded-xl p-6 hover:bg-cardinfo2 focus:bg-cardinfo2 group ">
@@ -234,7 +209,7 @@ export default InfoPemiluPage;
 const CardPaslon = () => {
   return (
     <>
-      {data.map((item) => (
+      {dataPaslonVote.map((item) => (
         <div
           className={`flex mb-5 w-[657px] ${item.bgCard}  py-5 px-8 rounded-xl shadow-md ${item.bgShadow} items-center`}
         >
@@ -271,32 +246,3 @@ const CardPaslon = () => {
     </>
   );
 };
-
-{
-  /* {onSelect ? ( */
-}
-{
-  /* // <div className="mt-20 mb-4 text-center">
-              //   <h3 className="text-red-500 font-bold text-[32px]">
-              //     ANDA SUDAH MEMILIH !!!
-              //   </h3>
-              // </div>
-              <div className="fixed w-full z-50 p-8 flex justify-center left-0 top-0">
-                <div className="bg-white border border-2 shadow-lg rounded-xl">
-                  <ModalVote />
-                </div>
-              </div>
-            ) : (
-              <div className="mt-16 text-center">
-                <button
-                  onClick={handleClick}
-                  className="bg-cardmini2 hover:bg-[#74711d] text-white  py-4 px-20 rounded-xl text-[32px] font-bold"
-                >
-                  MASUKAN SUARAMU
-                </button>
-              </div>
-            )} */
-}
-{
-  /* conditional select paslon */
-}
