@@ -1,11 +1,12 @@
 import { Response } from "express";
 import { AppDataSource } from "../data-source";
 import { Article } from "../entity/Article";
+import IArticle from "../interface/iarticle";
 
 export default new (class ArticleService {
   repository = AppDataSource.getRepository(Article);
 
-  async create(reqBody: any): Promise<any> {
+  async create(reqBody: IArticle): Promise<IArticle> {
     try {
       const article = this.repository.create({
         title: reqBody.title,

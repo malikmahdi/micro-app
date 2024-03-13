@@ -1,11 +1,16 @@
 import { Request, Response } from "express";
 import ArticleService from "../services/ArticleService";
+import { ArticleValidator } from "../validator/Article";
 
 export default new (class ArticleController {
   async create(req: Request, res: Response): Promise<Response> {
     try {
       const data = req.body;
-      const article = await ArticleService.create(data);
+      const { error, value } = ArticleValidator.validate(data);
+      const article = await ArticleService.create(value);
+
+      if (error)
+        return res.status(400).json({ message: error.details[0].message });
 
       return res.status(200).json(article);
     } catch (error) {
@@ -17,7 +22,7 @@ export default new (class ArticleController {
     try {
       const articles = await ArticleService.find();
 
-      return res.status(200).json({ articles });
+      return res.status(200).json(articles);
     } catch (error) {
       return res.status(500).json({ message: error });
     }
@@ -38,11 +43,17 @@ export default new (class ArticleController {
     try {
       const article_id = parseInt(req.params.id);
       const { body } = req;
-      await ArticleService.update(body, article_id);
+      const { error, value } = ArticleValidator.validate(body);
 
-      return res
-        .status(200)
-        .json({ message: "Update Success", data: { id: article_id, ...body } });
+      if (error)
+        return res.status(400).json({ message: error.details[0].message });
+
+      await ArticleService.update(value, article_id);
+
+      return res.status(200).json({
+        message: "Update Success",
+        data: { id: article_id, value },
+      });
     } catch (error) {
       return res.status(500).json({ message: error });
     }

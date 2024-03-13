@@ -1,10 +1,11 @@
 import { AppDataSource } from "../data-source";
 import { Partai } from "../entity/Partai";
+import IPartai from "../interface/ipartai";
 
 export default new (class PartaiService {
   repository = AppDataSource.getRepository(Partai);
 
-  async create(reqBody: any): Promise<any> {
+  async create(reqBody: IPartai): Promise<IPartai> {
     try {
       const partai = this.repository.create({
         name: reqBody.name,
@@ -42,9 +43,11 @@ export default new (class PartaiService {
   async findOne(id: number): Promise<any> {
     try {
       const partai = await this.repository
-        .createQueryBuilder()
+        .createQueryBuilder("partai")
         .where("partai.id = :id", { id: id })
         .getOne();
+
+      return partai;
     } catch (error) {
       throw error;
     }
@@ -73,7 +76,15 @@ export default new (class PartaiService {
         })
         .where("id = :id", { id: id })
         .execute();
-    } catch (error) {}
+
+      if (!updatePartai) {
+        throw new Error("Partai failed to update");
+      }
+
+      return updatePartai;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async delete(id: number): Promise<Partai> {
@@ -85,12 +96,12 @@ export default new (class PartaiService {
       });
 
       if (!partai) {
-        throw new Error("Partai not found!");
+        throw new Error("Data Partai not found!, failed to delete");
       }
 
       await this.repository.remove(partai);
 
-      await AppDataSource.getRepository(Partai)
+      await this.repository
         .createQueryBuilder()
         .delete()
         .from(Partai)

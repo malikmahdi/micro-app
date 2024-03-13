@@ -2,12 +2,13 @@
 
 import { AppDataSource } from "../data-source";
 import { User } from "../entity/User";
+import IUser from "../interface/iuser";
 
 export default new (class UserService {
   repository = AppDataSource.getRepository(User);
 
   // ---------------------- Create -------------------------------
-  async create(reqBody: any): Promise<any> {
+  async create(reqBody: IUser): Promise<IUser> {
     try {
       const data_user = this.repository.create({
         fullname: reqBody.fullname,
@@ -24,7 +25,6 @@ export default new (class UserService {
         .values(data_user)
         .execute();
 
-      console.log(data_user);
       return data_user;
     } catch (error) {
       throw error;
@@ -79,9 +79,9 @@ export default new (class UserService {
         .where("id = :id", { id: id })
         .execute();
 
-      // if (!user_update) {
-      //   throw new Error("User not found!");
-      // }
+      if (!user_update) {
+        throw new Error("User not found!");
+      }
 
       return user_update;
     } catch (error) {
@@ -104,7 +104,7 @@ export default new (class UserService {
 
       await this.repository.remove(data_user);
 
-      await AppDataSource.getRepository(User)
+      await this.repository
         .createQueryBuilder()
         .delete()
         .from(User)

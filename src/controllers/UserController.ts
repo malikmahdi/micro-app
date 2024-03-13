@@ -2,12 +2,17 @@
 
 import { Request, Response } from "express";
 import UserService from "../services/UserService";
+import { UserValidator } from "../validator/User";
 
 export default new (class UserController {
   async create(req: Request, res: Response): Promise<Response> {
     try {
       const data = req.body;
-      const user = await UserService.create(data);
+      const { error, value } = UserValidator.validate(data);
+      const user = await UserService.create(value);
+
+      if (error)
+        return res.status(400).json({ message: error.details[0].message });
 
       return res.status(200).json(user);
     } catch (error) {
@@ -40,11 +45,16 @@ export default new (class UserController {
     try {
       const id = parseInt(req.params.id);
       const { body } = req;
-      await UserService.update(body, id);
+      const { error, value } = UserValidator.validate(body);
+
+      if (error)
+        return res.status(400).json({ message: error.details[0].message });
+
+      await UserService.update(value, id);
 
       return res
         .status(200)
-        .json({ message: "Update success", data: { id: id, ...body } });
+        .json({ message: "Update success", data: { id: id, ...value } });
     } catch (error) {
       return res.status(500).json({ message: "Update Error" });
     }

@@ -1,15 +1,20 @@
 import { Request, Response } from "express";
 import PartaiService from "../services/PartaiService";
+import { PartaiValidator } from "../validator/Partai";
 
 export default new (class PartaiController {
   async create(req: Request, res: Response): Promise<Response> {
     try {
       const data = req.body;
-      const partai = await PartaiService.create(data);
+      const { error, value } = PartaiValidator.validate(data);
+      const partai = await PartaiService.create(value);
+
+      if (error)
+        return res.status(400).json({ message: error.details[0].message });
 
       return res.status(200).json({ message: "Data added success", partai });
     } catch (error) {
-      return res.status(500).json({ message: error });
+      return res.status(400).json({ message: error });
     }
   }
 
@@ -23,6 +28,7 @@ export default new (class PartaiController {
       return res.status(500).json({ message: error });
     }
   }
+
   async findOne(req: Request, res: Response): Promise<Response> {
     try {
       const id = parseInt(req.params.id);
@@ -32,7 +38,7 @@ export default new (class PartaiController {
         .status(200)
         .json({ message: "Get one data partai success", partai });
     } catch (error) {
-      throw error;
+      return res.status(500).json({ message: "Data partai not found!" });
     }
   }
 
@@ -40,11 +46,16 @@ export default new (class PartaiController {
     try {
       const id = parseInt(req.params.id);
       const { body } = req;
-      const partai = await PartaiService.update(body, id);
+      const { error, value } = PartaiValidator.validate(body);
+
+      if (error)
+        return res.status(400).json({ meesage: error.details[0].message });
+
+      await PartaiService.update(value, id);
 
       return res
         .status(200)
-        .json({ message: "Update success", data: { id: id, ...body } });
+        .json({ message: "Update success", data: { id: id, ...value } });
     } catch (error) {
       return res.status(500).json({ message: error });
     }
@@ -59,7 +70,7 @@ export default new (class PartaiController {
       return res.status(200).send("Data berhasil dihapus");
     } catch (error) {
       return res.status(500).json({
-        message: error,
+        message: "Data not found!",
       });
     }
   }

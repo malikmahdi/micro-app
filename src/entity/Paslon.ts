@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Partai } from "./Partai";
 
 @Entity()
 export class Paslon {
@@ -6,16 +7,20 @@ export class Paslon {
   id: number;
 
   @Column()
-  nama: string;
+  serial_number: number;
 
   @Column()
-  nomor_urut: number;
+  image: string;
+
+  @Column()
+  name: string;
 
   @Column()
   visi_misi: string;
 
-  @Column({ name: "partai.id" })
-  partai_id: number;
+  // @Column({ name: "partai.id" })
+  // partai_id: number;
 
-  // @OneToMany(() => Partai, (partai) => )
+  // @OneToMany(() => Partai, (partai) => partai.paslon)
+  // partai: Partai[];
 }
