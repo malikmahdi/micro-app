@@ -1,5 +1,6 @@
 import { AppDataSource } from "./data-source";
 import express, { Request, Response } from "express";
+import cors from "cors";
 import Route from "./routes";
 
 AppDataSource.initialize()
@@ -7,6 +8,7 @@ AppDataSource.initialize()
     const app = express();
     const port = 5000;
 
+    app.use(cors());
     app.use(express.json());
     app.use("/api/v1/", Route);
 

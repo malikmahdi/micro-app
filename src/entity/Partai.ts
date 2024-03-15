@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Paslon } from "./Paslon";
 
 @Entity()
@@ -21,6 +27,10 @@ export class Partai {
   @Column()
   address: string;
 
-  // @ManyToOne(() => Paslon, (paslon) => paslon.partai)
-  // paslon: Paslon;
+  @Column({ name: "paslon_id" })
+  paslonId: number;
+
+  @ManyToOne(() => Paslon, (paslon) => paslon.partai)
+  @JoinColumn({ name: "paslon_id", referencedColumnName: "id" })
+  paslon: Paslon;
 }

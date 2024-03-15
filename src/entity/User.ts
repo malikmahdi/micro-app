@@ -1,6 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  OneToOne,
+} from "typeorm";
 import { Article } from "./Article";
-// import { Blog } from "./Blog";
+import { Voting } from "./Voting";
 
 @Entity()
 export class User {
@@ -24,4 +30,7 @@ export class User {
 
   @OneToMany(() => Article, (article) => article.user)
   article: Article[];
+
+  @OneToOne(() => Voting, (voting) => voting.user)
+  voting: Voting;
 }

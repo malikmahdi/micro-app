@@ -4,6 +4,7 @@ interface IPartai {
   chairman: string;
   visi_misi: string;
   address: string;
+  paslonId: number;
 }
 
 export default IPartai;

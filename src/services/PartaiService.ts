@@ -13,6 +13,7 @@ export default new (class PartaiService {
         chairman: reqBody.chairman,
         visi_misi: reqBody.visi_misi,
         address: reqBody.address,
+        paslonId: reqBody.paslonId,
       });
 
       await this.repository
@@ -33,6 +34,7 @@ export default new (class PartaiService {
     try {
       const partaiAll = await this.repository
         .createQueryBuilder("partai")
+        .innerJoinAndSelect("partai.paslon", "paslon")
         .getMany();
       return partaiAll;
     } catch (error) {
@@ -44,6 +46,7 @@ export default new (class PartaiService {
     try {
       const partai = await this.repository
         .createQueryBuilder("partai")
+        .innerJoinAndSelect("partai.paslon", "paslon")
         .where("partai.id = :id", { id: id })
         .getOne();
 

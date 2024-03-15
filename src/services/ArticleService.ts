@@ -44,7 +44,6 @@ export default new (class ArticleService {
       throw error;
     }
   }
-
   async findOne(id: number): Promise<any> {
     try {
       const article = await this.repository
@@ -84,6 +83,8 @@ export default new (class ArticleService {
         })
         .where("id = :id", { id: id })
         .execute();
+
+      return updateArticle;
     } catch (error) {
       throw error;
     }

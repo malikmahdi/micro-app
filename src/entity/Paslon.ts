@@ -1,5 +1,12 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Partai } from "./Partai";
+import { Voting } from "./Voting";
 
 @Entity()
 export class Paslon {
@@ -18,9 +25,9 @@ export class Paslon {
   @Column()
   visi_misi: string;
 
-  // @Column({ name: "partai.id" })
-  // partai_id: number;
+  @OneToMany(() => Partai, (partai) => partai.paslon)
+  partai: Partai[];
 
-  // @OneToMany(() => Partai, (partai) => partai.paslon)
-  // partai: Partai[];
+  @OneToOne(() => Voting, (voting) => voting.paslon)
+  voting: Voting;
 }
