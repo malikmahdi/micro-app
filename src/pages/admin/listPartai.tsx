@@ -1,12 +1,49 @@
 import { Link } from "react-router-dom";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaRegTrashCan, FaRegPenToSquare } from "react-icons/fa6";
 import Navbar from "../../components/layouts/navbar";
 // image
 import Monyet2 from "../../assets/monyet-2.png";
 // json
 import listAdminNav from "../../json/listAdminNav.json";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+type Partai = {
+  name: string;
+  logo: string;
+  chairman: string;
+  visi_misi: string;
+  address: string;
+};
 
 const ListPartaiPage = () => {
+  const [isPartai, setPartai] = useState<Partai[]>();
+
+  const fetchPartai = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/v1/partaiAll"
+      );
+
+      setPartai(response.data);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    fetchPartai();
+  }, []);
+
+  const deletePartai = async (id: number) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/v1/partai/${id}`);
+      fetchPartai();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Navbar
@@ -40,48 +77,78 @@ const ListPartaiPage = () => {
                 <th className="text-center py-3 bg-dasar border border-[#828282]">
                   No.Urut
                 </th>
+                <th className="text-center py-3 bg-dasar border border-[#828282]">
+                  Name
+                </th>
                 <th className="text-center ps-2 bg-dasar  border border-[#828282]">
                   Logo
                 </th>
                 <th className="ps-2 bg-dasar  border border-[#828282]">
-                  Ketua Umum
+                  Chairman
                 </th>
                 <th className="text-center ps-2 bg-dasar border border-[#828282]">
                   Visi & Misi
                 </th>
                 <th className="text-center ps-2 bg-dasar border border-[#828282]">
-                  Alamat
+                  Address
+                </th>
+                <th className="text-center ps-2 bg-dasar border border-[#828282]">
+                  Control
                 </th>
               </tr>
             </thead>
             <tbody className="">
-              <tr className="bg-white">
-                <td className="ps-2  border border-[#828282]">
-                  <h5>1</h5>
-                </td>
-                <td className="ps-2 border border-[#828282]">
-                  <div className="px-10 py-2">
-                    <img
-                      src={Monyet2}
-                      className="h-32  bg-cover rounded-xl"
-                      alt=""
-                    />
-                  </div>
-                </td>
-                <td className="ps-2 border border-[#828282]">
-                  <h5>John Doe</h5>
-                </td>
-                <td className="ps-2 border border-[#828282]">
-                  <ul className="list-disc list-inside text-left">
-                    <li>Memindahkan Indonesia ke Isekai.</li>
-                    <li>Nonton anime 3x sehari.</li>
-                    <li>Melakukan peresapan pada budaya jepang.</li>
-                  </ul>
-                </td>
-                <td className="ps-2 border border-[#828282] text-left">
-                  <p>Jl.Swasembada Barat</p>
-                </td>
-              </tr>
+              {isPartai?.map((data, index) => {
+                return (
+                  <tr className="bg-white" key={index}>
+                    <td className="ps-2  border border-[#828282]">
+                      <h5>1</h5>
+                    </td>
+                    <td className="ps-2 border border-[#828282]">
+                      <h5>{data.name}</h5>
+                    </td>
+                    <td className="ps-2 border border-[#828282]">
+                      <div className="px-10 py-2">
+                        <img
+                          src={data.logo}
+                          className="h-32  bg-cover rounded-xl"
+                          alt=""
+                        />
+                      </div>
+                    </td>
+                    <td className="ps-2 border border-[#828282]">
+                      <h5>{data.chairman}</h5>
+                    </td>
+                    <td className="ps-2 border border-[#828282]">
+                      <ul className="list-disc list-inside text-center">
+                        {data.visi_misi}
+                      </ul>
+                    </td>
+                    <td className="ps-2 border border-[#828282] text-center">
+                      <p>{data.address}</p>
+                    </td>
+                    <td className="ps-2 border border-[#828282] text-center">
+                      <div className="gap-2">
+                        <button className="px-3 py-2 bg-slate-500 hover:bg-slate-700 text-white rounded-md">
+                          <span className="flex justify-items-center items-center gap-1">
+                            <FaRegPenToSquare />
+                            Update
+                          </span>
+                        </button>
+                        <button
+                          onClick={() => deletePartai(data.id)}
+                          className="px-5 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md"
+                        >
+                          <span className="flex justify-items-center items-center gap-1">
+                            <FaRegTrashCan />
+                            Delete
+                          </span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

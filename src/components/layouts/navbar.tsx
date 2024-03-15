@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { InterfaceNavbar } from "../interface/inavbar.ts";
 import logoDw from "../../assets/logo-dw.png";
@@ -27,6 +27,19 @@ const Navbar = (props: InterfaceNavbar) => {
     e.preventDefault();
     setUserLogin(!userLogin);
     setOpenLogin(false);
+  };
+
+  // Register Proses
+  const [dataUser, setDataUser] = useState({
+    fullname: "",
+    address: "",
+    gender: "",
+    username: "",
+    password: "",
+  });
+
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setDataUser({ ...dataUser, [e.target.name]: e.target.value });
   };
 
   return (
@@ -125,6 +138,7 @@ const Navbar = (props: InterfaceNavbar) => {
                 type="fullname"
                 name="fullname"
                 placeholder="John Doe"
+                onClick={handleInput}
               ></InputGroup>
 
               <InputGroup
@@ -134,12 +148,29 @@ const Navbar = (props: InterfaceNavbar) => {
                 placeholder="Jl.Swaasembada"
               ></InputGroup>
 
-              <InputGroup
+              <div className="mb-5 flex flex-col">
+                <label htmlFor="" className="block text-[#595959] font-bold">
+                  Gender
+                </label>
+                <select
+                  name="gender"
+                  id=""
+                  className="border w-full px-2 py-2 rounded-md outline outline-1 outline-[#595959] focus:ring-[#595959]"
+                >
+                  <option value="" selected disabled>
+                    Choose
+                  </option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+
+              {/* <InputGroup
                 label="Jenis Kelamin"
                 type="username"
                 name="username"
                 placeholder="example@gmail.com"
-              ></InputGroup>
+              ></InputGroup> */}
 
               <InputGroup
                 label="Username :"
