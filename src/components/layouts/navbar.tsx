@@ -1,10 +1,11 @@
 import React, { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InterfaceNavbar } from "../interface/inavbar.ts";
 import logoDw from "../../assets/logo-dw.png";
 import InputGroup from "../elements/inputGroup.tsx";
 import ModalLogin from "./modalLogin";
 import ModalRegister from "./modalRegister";
+import axios from "axios";
 
 const Navbar = (props: InterfaceNavbar) => {
   const { titleNavbar, listItem } = props;
@@ -37,9 +38,24 @@ const Navbar = (props: InterfaceNavbar) => {
     username: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setDataUser({ ...dataUser, [e.target.name]: e.target.value });
+  };
+
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setDataUser({ ...dataUser, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:5000/api/v1/user", dataUser);
+      // navigate("/voting");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -132,61 +148,82 @@ const Navbar = (props: InterfaceNavbar) => {
             <h1 className="text-btn font-extrabold text-4xl mb-8 text-center">
               REGISTER
             </h1>
-            <form action="" className="mt-5">
-              <InputGroup
-                label="Fullname :"
-                type="fullname"
-                name="fullname"
-                placeholder="John Doe"
-                onClick={handleInput}
-              ></InputGroup>
+            <form onSubmit={handleSubmit} className="mt-5">
+              <div className="mb-5">
+                <label htmlFor="" className="block text-[#595959] font-bold">
+                  Fullname :
+                </label>
+                <input
+                  type="text"
+                  className="border w-full px-4 py-2 rounded-md outline outline-1 outline-[#595959] focus:ring-2 focus:ring-[#595959]"
+                  placeholder="John Doe"
+                  name="fullname"
+                  onChange={handleInput}
+                />
+              </div>
 
-              <InputGroup
-                label="Address :"
-                type="text"
-                name="address"
-                placeholder="Jl.Swaasembada"
-              ></InputGroup>
+              <div className="mb-5">
+                <label htmlFor="" className="block text-[#595959] font-bold">
+                  Address :
+                </label>
+                <input
+                  type="text"
+                  className="border w-full px-4 py-2 rounded-md outline outline-1 outline-[#595959] focus:ring-2 focus:ring-[#595959]"
+                  placeholder="Jl.Jaya Raya"
+                  name="address"
+                  onChange={handleInput}
+                />
+              </div>
 
               <div className="mb-5 flex flex-col">
                 <label htmlFor="" className="block text-[#595959] font-bold">
-                  Gender
+                  Gender :
                 </label>
                 <select
                   name="gender"
                   id=""
                   className="border w-full px-2 py-2 rounded-md outline outline-1 outline-[#595959] focus:ring-[#595959]"
+                  onChange={handleSelect}
                 >
-                  <option value="" selected disabled>
-                    Choose
+                  <option selected disabled>
+                    --- Choose ---
                   </option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </div>
 
-              {/* <InputGroup
-                label="Jenis Kelamin"
-                type="username"
-                name="username"
-                placeholder="example@gmail.com"
-              ></InputGroup> */}
+              <div className="mb-5">
+                <label htmlFor="" className="block text-[#595959] font-bold">
+                  Username :
+                </label>
+                <input
+                  type="text"
+                  className="border w-full px-4 py-2 rounded-md outline outline-1 outline-[#595959] focus:ring-2 focus:ring-[#595959]"
+                  placeholder="johndoe123"
+                  name="username"
+                  onChange={handleInput}
+                />
+              </div>
 
-              <InputGroup
-                label="Username :"
-                type="username"
-                name="username"
-                placeholder="johndoe123"
-              ></InputGroup>
+              <div className="mb-5">
+                <label htmlFor="" className="block text-[#595959] font-bold">
+                  Password :
+                </label>
+                <input
+                  type="password"
+                  className="border w-full px-4 py-2 rounded-md outline outline-1 outline-[#595959] focus:ring-2 focus:ring-[#595959]"
+                  placeholder="************"
+                  name="password"
+                  onChange={handleInput}
+                />
+              </div>
 
-              <InputGroup
-                label="Password :"
-                type="password"
-                name="password"
-                placeholder="************"
-              ></InputGroup>
-
-              <button className="bg-btn hover:bg-[#74711d] text-white font-bold px-8 py-2 w-full rounded-md">
+              <button
+                onClick={handleLogin}
+                type="submit"
+                className="bg-btn hover:bg-[#74711d] text-white font-bold px-8 py-2 w-full rounded-md"
+              >
                 SUBMIT
               </button>
             </form>

@@ -5,21 +5,15 @@ type Props = {
   type: string;
   placeholder: string;
   name: string;
-  onclick: () => {};
 };
 
 const InputGroup = (props: Props) => {
-  const { type, placeholder, name, label, onclick } = props;
+  const { type, placeholder, name, label } = props;
 
   return (
     <div className="mb-5">
       <Label htmlFor={name} label={label}></Label>
-      <Input
-        type={type}
-        placeholder={placeholder}
-        name={name}
-        onclick={onclick}
-      />
+      <Input type={type} placeholder={placeholder} name={name} />
     </div>
   );
 };

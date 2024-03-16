@@ -12,6 +12,7 @@ import InfoPemiluPage from "./pages/user/infoPemilu.tsx";
 import BeritaPage from "./pages/user/berita.tsx";
 import ErrorPage from "./pages/error.tsx";
 import FormArticlePage from "./pages/admin/addArtcile.tsx";
+import UpdatePartaiPage from "./pages/admin/updatePartai.tsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/form-partai",
     element: <FormPartaiPage />,
+  },
+  {
+    path: "/update-partai/:id",
+    element: <UpdatePartaiPage />,
   },
   {
     path: "/list-paslon",

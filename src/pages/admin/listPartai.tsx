@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaPlus, FaRegTrashCan, FaRegPenToSquare } from "react-icons/fa6";
 import Navbar from "../../components/layouts/navbar";
-// image
-import Monyet2 from "../../assets/monyet-2.png";
 // json
 import listAdminNav from "../../json/listAdminNav.json";
 import { useState, useEffect } from "react";
@@ -74,25 +72,25 @@ const ListPartaiPage = () => {
           <table className="w-full  border border-collapse table-auto border-slate-400 ">
             <thead className="">
               <tr className="bg-white   text-center">
-                <th className="text-center py-3 bg-dasar border border-[#828282]">
-                  No.Urut
+                <th className="text-center px-2 py-3 w-[3%]  bg-dasar border border-[#828282]">
+                  No.
                 </th>
-                <th className="text-center py-3 bg-dasar border border-[#828282]">
+                <th className="text-center py-3 w-[10%] bg-dasar border border-[#828282]">
                   Name
                 </th>
-                <th className="text-center ps-2 bg-dasar  border border-[#828282]">
+                <th className="text-center w-[18%] bg-dasar  border border-[#828282]">
                   Logo
                 </th>
-                <th className="ps-2 bg-dasar  border border-[#828282]">
+                <th className="text-center w-[8%] bg-dasar border border-[#828282]">
                   Chairman
                 </th>
-                <th className="text-center ps-2 bg-dasar border border-[#828282]">
+                <th className="text-center w-[25%] bg-dasar border border-[#828282]">
                   Visi & Misi
                 </th>
-                <th className="text-center ps-2 bg-dasar border border-[#828282]">
+                <th className="text-center w-[22%] bg-dasar border border-[#828282]">
                   Address
                 </th>
-                <th className="text-center ps-2 bg-dasar border border-[#828282]">
+                <th className="text-center w-[14%] bg-dasar border border-[#828282]">
                   Control
                 </th>
               </tr>
@@ -101,13 +99,13 @@ const ListPartaiPage = () => {
               {isPartai?.map((data, index) => {
                 return (
                   <tr className="bg-white" key={index}>
-                    <td className="ps-2  border border-[#828282]">
-                      <h5>1</h5>
+                    <td className="border border-[#828282]">
+                      <h5>{index + 1}</h5>
                     </td>
-                    <td className="ps-2 border border-[#828282]">
+                    <td className="border border-[#828282]">
                       <h5>{data.name}</h5>
                     </td>
-                    <td className="ps-2 border border-[#828282]">
+                    <td className="border border-[#828282]">
                       <div className="px-10 py-2">
                         <img
                           src={data.logo}
@@ -116,28 +114,31 @@ const ListPartaiPage = () => {
                         />
                       </div>
                     </td>
-                    <td className="ps-2 border border-[#828282]">
+                    <td className="border border-[#828282]">
                       <h5>{data.chairman}</h5>
                     </td>
-                    <td className="ps-2 border border-[#828282]">
+                    <td className="border border-[#828282]">
                       <ul className="list-disc list-inside text-center">
                         {data.visi_misi}
                       </ul>
                     </td>
-                    <td className="ps-2 border border-[#828282] text-center">
+                    <td className="border border-[#828282] text-center ">
                       <p>{data.address}</p>
                     </td>
-                    <td className="ps-2 border border-[#828282] text-center">
-                      <div className="gap-2">
-                        <button className="px-3 py-2 bg-slate-500 hover:bg-slate-700 text-white rounded-md">
-                          <span className="flex justify-items-center items-center gap-1">
-                            <FaRegPenToSquare />
-                            Update
-                          </span>
-                        </button>
+                    <td className="border border-[#828282] text-center">
+                      <div className="flex mx-2 gap-1">
+                        <Link to={`/update-partai/${data.id}`}>
+                          <button className="px-3 py-2 bg-slate-500 hover:bg-slate-700 text-white rounded-md">
+                            <span className="flex justify-items-center items-center gap-1">
+                              <FaRegPenToSquare />
+                              Update
+                            </span>
+                          </button>
+                        </Link>
+
                         <button
                           onClick={() => deletePartai(data.id)}
-                          className="px-5 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md"
+                          className="px-3 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md"
                         >
                           <span className="flex justify-items-center items-center gap-1">
                             <FaRegTrashCan />
