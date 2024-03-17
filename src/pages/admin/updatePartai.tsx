@@ -12,7 +12,7 @@ const UpdatePartaiPage = () => {
     chairman: "",
     visi_misi: "",
     address: "",
-    paslonId: null,
+    paslonId: undefined,
   });
   const navigate = useNavigate();
   const { id } = useParams();
@@ -24,6 +24,7 @@ const UpdatePartaiPage = () => {
         `http://localhost:5000/api/v1/partai/${id}`,
         updatePartai
       );
+
       navigate("/list-partai");
     } catch (error) {
       console.log(error);
@@ -39,7 +40,8 @@ const UpdatePartaiPage = () => {
       const { data } = await axios.get(
         `http://localhost:5000/api/v1/partai/${id}`
       );
-      setUpdatePartai(data);
+      console.log("ini data want to update :", data);
+      setUpdatePartai(data.data);
     } catch (error) {
       console.log(error);
     }

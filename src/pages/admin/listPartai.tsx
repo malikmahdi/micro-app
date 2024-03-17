@@ -5,8 +5,10 @@ import Navbar from "../../components/layouts/navbar";
 import listAdminNav from "../../json/listAdminNav.json";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ModalConfirmDelete from "../../components/layouts/modalConfirmasi";
 
 type Partai = {
+  id: number;
   name: string;
   logo: string;
   chairman: string;
@@ -16,6 +18,7 @@ type Partai = {
 
 const ListPartaiPage = () => {
   const [isPartai, setPartai] = useState<Partai[]>();
+  const [modalDelete, setModalDelete] = useState(false);
 
   const fetchPartai = async () => {
     try {
@@ -137,7 +140,7 @@ const ListPartaiPage = () => {
                         </Link>
 
                         <button
-                          onClick={() => deletePartai(data.id)}
+                          onClick={() => setModalDelete(true)}
                           className="px-3 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md"
                         >
                           <span className="flex justify-items-center items-center gap-1">
@@ -145,6 +148,38 @@ const ListPartaiPage = () => {
                             Delete
                           </span>
                         </button>
+
+                        <ModalConfirmDelete
+                          open={modalDelete}
+                          onClose={() => {
+                            setModalDelete(false);
+                          }}
+                        >
+                          <div className="flex justify-center  items-center">
+                            <div className="w-96 mx-6">
+                              <h1 className="text-btn font-extrabold text-2xl text-center mb-5">
+                                Are you sure you want to delete?
+                              </h1>
+                              <hr />
+                              <div className="flex gap-2 mt-5">
+                                <button
+                                  onClick={() => deletePartai(data.id)}
+                                  className="w-full py-2 bg-red-500 text-white rounded-md"
+                                >
+                                  Yes
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    setModalDelete(false);
+                                  }}
+                                  className="w-full py-2 bg-red-500 text-white rounded-md"
+                                >
+                                  No
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </ModalConfirmDelete>
                       </div>
                     </td>
                   </tr>
