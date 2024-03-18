@@ -33,18 +33,18 @@ const ListPartaiPage = () => {
     }
   };
 
-  const fetchPartaiOne = async (
-    e: FormEvent<HTMLButtonElement>
-  ): Promise<void> => {
-    e.preventDefault();
-    try {
-      await axios.get(`http://localhost:5000/api/v1/partai`);
+  // const fetchPartaiOne = async (
+  //   e: FormEvent<HTMLButtonElement>
+  // ): Promise<void> => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios.get(`http://localhost:5000/api/v1/partai`);
 
-      fetchPartai();
-    } catch (error) {
-      throw error;
-    }
-  };
+  //     fetchPartai();
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
 
   useEffect(() => {
     fetchPartai();
@@ -83,10 +83,7 @@ const ListPartaiPage = () => {
                 placeholder="Search Partai..."
                 className="w-full border border-slate-400 px-3 py-1  outline-none"
               />
-              <button
-                onClick={fetchPartaiOne}
-                className="border border-slate-400 py-1 px-3 hover:bg-blue-500 hover:text-white"
-              >
+              <button className="border border-slate-400 py-1 px-3 hover:bg-blue-500 hover:text-white">
                 <FiSearch />
               </button>
             </form>
