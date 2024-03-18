@@ -24,12 +24,12 @@ const DashboardPage = () => {
           {dataPaslon.map((items) => (
             <div className="col-span-1">
               <div
-                className={`w-24 h-24 mx-auto flex items-center justify-center mb-6 ${items.bgCard}  border-8 ${items.colorBorder} rounded-full ${items.colorText} text-[32px] font-bold`}
+                className={`w-24 h-24 mx-auto flex items-center justify-center mb-6 ${items.bgCardPaslon}  rounded-full ${items.colorText} shadow-lg text-[32px] font-bold`}
               >
                 <h5>{items.no}</h5>
               </div>
               <div
-                className={`${items.bgCard} rounded-xl p-6 shadow-lg shadow-slate-600`}
+                className={`${items.bgCardPaslon} rounded-xl p-6 shadow-lg shadow-slate-600`}
               >
                 <div className="mb-2">
                   <img

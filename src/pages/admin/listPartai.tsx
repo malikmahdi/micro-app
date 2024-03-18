@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
-import { FaPlus, FaRegTrashCan, FaRegPenToSquare } from "react-icons/fa6";
+import { FiEdit, FiPlusSquare, FiSearch, FiTrash2 } from "react-icons/fi";
 import Navbar from "../../components/layouts/navbar";
 // json
 import listAdminNav from "../../json/listAdminNav.json";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import axios from "axios";
 import ModalConfirmDelete from "../../components/layouts/modalConfirmasi";
 
 type Partai = {
   id: number;
+  partaiId: number;
   name: string;
   logo: string;
   chairman: string;
@@ -27,6 +28,19 @@ const ListPartaiPage = () => {
       );
 
       setPartai(response.data);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const fetchPartaiOne = async (
+    e: FormEvent<HTMLButtonElement>
+  ): Promise<void> => {
+    e.preventDefault();
+    try {
+      await axios.get(`http://localhost:5000/api/v1/partai`);
+
+      fetchPartai();
     } catch (error) {
       throw error;
     }
@@ -60,11 +74,27 @@ const ListPartaiPage = () => {
           </div>
         </div>
 
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <div className="w-2/4">
+            <form action="" className="flex">
+              <input
+                type="search"
+                id="search"
+                placeholder="Search Partai..."
+                className="w-full border border-slate-400 px-3 py-1  outline-none"
+              />
+              <button
+                onClick={fetchPartaiOne}
+                className="border border-slate-400 py-1 px-3 hover:bg-blue-500 hover:text-white"
+              >
+                <FiSearch />
+              </button>
+            </form>
+          </div>
           <Link to="/form-partai">
             <button className="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-md">
               <span className="flex items-center gap-1">
-                <FaPlus />
+                <FiPlusSquare />
                 Partai
               </span>
             </button>
@@ -98,14 +128,14 @@ const ListPartaiPage = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="">
+            <tbody className="" id="table-body">
               {isPartai?.map((data, index) => {
                 return (
-                  <tr className="bg-white" key={index}>
+                  <tr className="bg-white" key={index} id="table-row">
                     <td className="border border-[#828282]">
                       <h5>{index + 1}</h5>
                     </td>
-                    <td className="border border-[#828282]">
+                    <td className="border border-[#828282]" id="data-name">
                       <h5>{data.name}</h5>
                     </td>
                     <td className="border border-[#828282]">
@@ -133,7 +163,7 @@ const ListPartaiPage = () => {
                         <Link to={`/update-partai/${data.id}`}>
                           <button className="px-3 py-2 bg-slate-500 hover:bg-slate-700 text-white rounded-md">
                             <span className="flex justify-items-center items-center gap-1">
-                              <FaRegPenToSquare />
+                              <FiEdit />
                               Update
                             </span>
                           </button>
@@ -144,7 +174,7 @@ const ListPartaiPage = () => {
                           className="px-3 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md"
                         >
                           <span className="flex justify-items-center items-center gap-1">
-                            <FaRegTrashCan />
+                            <FiTrash2 />
                             Delete
                           </span>
                         </button>
